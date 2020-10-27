@@ -54,3 +54,9 @@ class MyBitString:
                 if b!='0' and b!='1':
                     print('Incorrect input')
                     exit()
+
+    def __and__(self, b): #overloading &
+        return self.conj(b)
+    
+    def __str__(self): # overloading str
+        return self.mas
