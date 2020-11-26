@@ -7,6 +7,10 @@ if len(sys.argv) <3:
     bs1.inp()
     bs2.inp()
     print('a & b = ', bs1& bs2)
+    d=bs1&bs2
+    print(d[2])
+    d[7]=3
+    print(d)
 else:
     bs1.f_inp(sys.argv[1]) #file input
     bs2.f_inp(sys.argv[2])

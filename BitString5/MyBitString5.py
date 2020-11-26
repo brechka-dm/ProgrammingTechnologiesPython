@@ -60,3 +60,12 @@ class MyBitString:
     
     def __str__(self): # overloading str
         return self.mas
+        
+    def __getitem__(self, i): #overloading []
+        if i>=0 and i<len(self.mas): #if i in mas index range
+            return self.mas[i]
+        return -1; #error identifier
+    
+    def __setitem__(self, i, x): #overloading []
+        if i>=0 and i<len(self.mas): #if i in mas index range
+            self.mas=self.mas[:i]+str(x)+self.mas[i+1:] #construct new self.mas

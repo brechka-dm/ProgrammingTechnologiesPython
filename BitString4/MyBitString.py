@@ -1,10 +1,16 @@
 class MyBitString:
-    def inp(self): #manual input
-        self.mas=input('Input bit string : ') #mas is object member
-        for b in self.mas: 
+    def mas_from_str(self, st):
+        self.mas=""
+        for b in st: 
             if b!='0' and b!='1':
                 print('Incorrect input')
                 exit()
+            else:
+                self.mas+=(b)
+            
+    def inp(self): #manual input
+        m=input('Input bit string : ') #mas is object member
+        self.mas_from_str(m)
     
     def f_inp(self,filename): #file input
         try:
@@ -12,11 +18,8 @@ class MyBitString:
         except:
             print('Unable to open file')
             exit()
-        self.mas=file.readline()
-        for b in self.mas: 
-            if b!='0' and b!='1':
-                print('Incorrect input')
-                exit()
+        m=file.readline()
+        self.mas_from_str(m)
         file.close()
 
     def outp(self): #console output
@@ -49,8 +52,4 @@ class MyBitString:
         
     def __init__(self, init_str=None): # constructor
         if init_str!=None: #if init_str==None it works like default constructor
-            self.mas=init_str
-            for b in self.mas: 
-                if b!='0' and b!='1':
-                    print('Incorrect input')
-                    exit()
+            self.mas_from_str(init_str)
