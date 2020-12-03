@@ -62,9 +62,9 @@ class MyBitString:
         
     def __getitem__(self, i): #overloading []
         if i>=0 and i<len(self.mas): #if i in mas index range
-            return self.mas[i]
+            return self.mas[i-len(self.mas)-1] #reverse bit numbers
         return -1; #error identifier
     
     def __setitem__(self, i, x): #overloading []
-        if i>=0 and i<len(self.mas): #if i in mas index range
+        if i>=0 and i<len(self.mas) and (str(x)=='0' or str(x)=='1'): #if i in mas index range and x=0 or x=1
             self.mas=self.mas[:i]+str(x)+self.mas[i+1:] #construct new self.mas
