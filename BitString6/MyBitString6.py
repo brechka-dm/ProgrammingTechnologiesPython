@@ -13,19 +13,25 @@ class MyBitString:
         m=input('Input bit string : ') #mas is object member
         self.mas_from_str(m)
     
-    def f_inp(self,filename): #file input
-        file=open(filename, 'r')
-        m=file.readline()
-        self.mas_from_str(m)
-        file.close()
+    def f_inp(self,filename):
+		try:
+			file=open(filename, 'r')
+		except:
+			raise FileNotFoundError("Unable to open file: "+filename)
+		m=file.readline()
+		self.mas_from_str(m)
+		file.close()
 
     def outp(self): #console output
         print(self.mas)
         
-    def f_outp(self, filename): #file output
-        res=open(filename,'w')
-        res.write(self.mas)
-        res.close()        
+	def f_outp(self, filename): 
+		try:
+			res=open(filename,'w')
+		except:
+			raise FileNotFoundError("Unable to open file")
+		res.write(self.mas)
+		res.close()	       
 
     def conj(self, b): #b is a MyBitString object
         c='' #c is string
@@ -64,7 +70,11 @@ class MyBitString:
             raise IndexError("Index out of bounds")
     
     def __setitem__(self, i, x): #overloading []
-        if i>=0 and i<len(self.mas): #if i in mas index range
-            self.mas=self.mas[:i]+str(x)+self.mas[i+1:] #construct new self.mas
-        else:
-            raise IndexError("Index out of bounds")
+		if i>=0 and i<len(self.mas):
+			if (str(x)=='0' or str(x)=='1'): #if i in mas index range and x=0 or x=1
+				i=i-len(self.mas)-1 #reverse bit number
+				self.mas=self.mas[:i]+str(x)+self.mas[i+1:] #construct new self.mas
+			else:
+				raise ValueError("Incorrect symbol found")
+		else:
+			raise IndexError("Index out of bounds")
